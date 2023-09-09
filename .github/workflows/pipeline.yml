@@ -18,6 +18,11 @@ jobs:
         run: |
           npm install
 
+      - name: Configurar Token de Acesso Pessoal        
+        run: |           
+          echo "TOKEN=$TOKEN" >> $GITHUB_ENV        
+          env:          
+          TOKEN: ${{ secrets.Pipelines }}
       - name: Set up Git user
         run: |
          git config --global user.name $user_name
