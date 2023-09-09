@@ -17,12 +17,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-
-      - name: Configurar Token de Acesso Pessoal        
-        run: |           
-          echo "TOKEN=$TOKEN" >> $GITHUB_ENV        
-          env:          
-          TOKEN: ${{ secrets.Pipelines }}
       - name: Set up Git user
         run: |
          git config --global user.name $user_name
@@ -31,7 +25,7 @@ jobs:
         env:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+          github_token: ${{ secrets.Pipelines }}
           repository: ${{ github.repository }}
 
       - name: Build React app
@@ -41,7 +35,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+          github_token: ${{ secrets.Pipelines }}
           publish_dir: ./build
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
